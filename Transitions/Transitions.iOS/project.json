@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "Xamarin.Forms": "2.3.0.49"
+  },
+  "frameworks": {
+    "xamarinios10": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0"
+      },
+      "imports": [
+        "portable-monoandroid10+monotouch10+net45+win+win81+wp8+wpa81+xamarinios10"
+      ]
+    }
+  }
+}
