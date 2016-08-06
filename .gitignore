@@ -6,3 +6,6 @@ obj
 restore.dg
 
 *.lock.json
+*.nuget.targets
+
+#ls -r *.*proj | % { &(Find-MSBuild) $_ }

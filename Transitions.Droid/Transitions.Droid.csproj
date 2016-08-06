@@ -30,13 +30,9 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="System.Core" />
-    <Reference Include="Animations">
-      <HintPath>..\..\Animations\Animations\bin\$(Configuration)\netstandard1.3\Animations.dll</HintPath>
-    </Reference>
     <Reference Include="Transitions">
       <HintPath>..\Transitions\bin\$(Configuration)\netstandard1.3\Transitions.dll</HintPath>
     </Reference>
-    <ProjectReference Include="..\..\Animations\Animations.Droid\Animations.Droid.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
