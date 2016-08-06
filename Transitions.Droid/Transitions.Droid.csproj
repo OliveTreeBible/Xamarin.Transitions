@@ -7,6 +7,7 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>OliveTree.Transitions.Droid</RootNamespace>
+    <AssemblyName>OliveTree.Transitions.Droid</AssemblyName>
     <OutputPath>bin\$(Configuration)</OutputPath>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>

@@ -1,5 +1,8 @@
 bin
 obj
+*.exe
+*.dll
+*.pdb
 
 *.suo
 *.*proj.user
