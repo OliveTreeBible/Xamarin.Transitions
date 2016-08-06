@@ -30,12 +30,7 @@
   <ItemGroup>
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Transitions">
-      <HintPath>..\Transitions\bin\$(Configuration)\netstandard1.3\Transitions.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Transitions\Transitions.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Target Name="BuildShared" BeforeTargets="ResolveAssemblyReferences">
-    <MSBuild Projects="..\Transitions\Transitions.xproj" UnloadProjectsOnCompletion="true" UseResultsCache="true" />
-  </Target>
 </Project>
