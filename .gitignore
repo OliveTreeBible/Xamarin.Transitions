@@ -11,3 +11,5 @@ restore.dg
 
 *.lock.json
 *.nuget.targets
+*.nupkg
+*.zip

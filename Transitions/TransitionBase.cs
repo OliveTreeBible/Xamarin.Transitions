@@ -156,7 +156,7 @@ namespace OliveTree.Transitions
             if (_handler == null)
             {
                 action();
-                return Task.CompletedTask;
+                return Task.FromResult(0);
             }
 
             var tcs = new TaskCompletionSource<bool>();

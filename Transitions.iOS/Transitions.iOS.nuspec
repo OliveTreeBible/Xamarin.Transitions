@@ -7,7 +7,7 @@
     <licenseUrl>https://github.com/OliveTreeBible/Xamarin.Transitions/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/OliveTreeBible/Xamarin.Transitions</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>iOS implementation of the Olive Tree Transitions library.</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags></tags>
