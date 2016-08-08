@@ -1,7 +1,7 @@
 using System;
 using CoreAnimation;
 using Foundation;
-using OliveTree.Animations.iOS.Interpolators;
+using OliveTree.Transitions.iOS.Animations.Interpolators;
 using UIKit;
 using Xamarin.Forms;
 

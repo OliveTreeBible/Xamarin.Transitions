@@ -1,9 +1,8 @@
-using OliveTree.Animations;
-using OliveTree.Animations.Curves;
 using System;
+using OliveTree.Transitions.Curves;
 using Xamarin.Forms;
 
-namespace OliveTree.Transitions.Transitions
+namespace OliveTree.Transitions
 {
     public class EdgeTransition : LayoutTransition
     {

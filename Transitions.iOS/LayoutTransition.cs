@@ -1,6 +1,6 @@
 ﻿using System;
 using CoreGraphics;
-using OliveTree.Animations.iOS.Interpolators;
+using OliveTree.Transitions.iOS.Animations.Interpolators;
 using UIKit;
 
 namespace OliveTree.Transitions.iOS

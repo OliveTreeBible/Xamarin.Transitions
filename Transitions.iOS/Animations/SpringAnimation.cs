@@ -1,10 +1,10 @@
 using Foundation;
-using OliveTree.Animations.Curves;
-using OliveTree.Animations.iOS.Interpolators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreAnimation;
+using OliveTree.Transitions.Curves;
+using OliveTree.Transitions.iOS.Animations.Interpolators;
 
 namespace OliveTree.Animations.iOS
 {

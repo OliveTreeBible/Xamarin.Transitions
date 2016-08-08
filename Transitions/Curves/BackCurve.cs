@@ -1,6 +1,6 @@
 using System;
 
-namespace OliveTree.Animations.Curves
+namespace OliveTree.Transitions.Curves
 {
     public class BackCurve : EasingCurve
     {

@@ -1,6 +1,6 @@
 using Xamarin.Forms;
 
-namespace OliveTree.Transitions.Transitions
+namespace OliveTree.Transitions
 {
     public class TransformTransition : TransitionBase
     {

@@ -4,12 +4,9 @@ using System.Linq;
 using Android.Animation;
 using Android.Transitions;
 using Android.Views;
-using OliveTree.Animations.Curves;
-using OliveTree.Animations.Droid;
-using OliveTree.Transitions.Transitions;
+using OliveTree.Transitions.Curves;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using LayoutTransition = OliveTree.Transitions.Transitions.LayoutTransition;
 using View = Android.Views.View;
 
 namespace OliveTree.Transitions.Droid

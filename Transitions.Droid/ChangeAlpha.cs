@@ -4,7 +4,7 @@ using Android.Runtime;
 using Android.Transitions;
 using Android.Views;
 
-namespace OliveTree.Animations.Droid
+namespace OliveTree.Transitions.Droid
 {
     public class ChangeAlpha : Transition
     {

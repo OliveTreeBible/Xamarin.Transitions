@@ -4,6 +4,7 @@
     "debugType": "portable"
   },
   "dependencies": {
+    "System.ComponentModel": "4.0.1",
     "System.Reflection.TypeExtensions": "4.1.0",
     "Xamarin.Forms": "2.3.0.49"
   },

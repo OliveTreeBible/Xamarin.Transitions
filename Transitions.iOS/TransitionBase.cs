@@ -1,9 +1,9 @@
 using System;
 using Foundation;
 using CoreAnimation;
-using OliveTree.Animations.Curves;
 using OliveTree.Animations.iOS;
-using OliveTree.Animations.iOS.Interpolators;
+using OliveTree.Transitions.Curves;
+using OliveTree.Transitions.iOS.Animations.Interpolators;
 using UIKit;
 using Xamarin.Forms.Platform.iOS;
 

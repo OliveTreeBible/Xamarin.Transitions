@@ -1,4 +1,3 @@
-using OliveTree.Animations.Curves;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,44 +5,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using OliveTree.Transitions.Curves;
+using OliveTree.Transitions.Extensions;
 using Xamarin.Forms;
 using PropertyChangingEventArgs = Xamarin.Forms.PropertyChangingEventArgs;
 
-namespace OliveTree.Transitions.Transitions
+namespace OliveTree.Transitions
 {
     public abstract class TransitionBase
     {
-        #region BatchCommitted event access
-
-        private static readonly EventInfo BatchCommittedEvent = typeof(VisualElement).GetEvent("BatchCommitted", BindingFlags.Instance | BindingFlags.NonPublic);
-        private static readonly Lazy<Type> BatchHandlerType = new Lazy<Type>(() =>
-        {
-            //This whole thing is because EventArg<T> is internal to Forms
-            // Otherwise we could just create EventHandler<EventArg<VisualElement>>
-            var eventArgsType = typeof(EventArgs);
-
-            var assem = typeof(VisualElement).GetTypeInfo().Assembly;
-            var argType = assem.DefinedTypes.FirstOrDefault(t => t.FullName == "Xamarin.Forms.EventArg`1" && eventArgsType.IsAssignableFrom(t.AsType()));
-
-            if (argType == null) return null;
-            return typeof(EventHandler<>).MakeGenericType(argType.MakeGenericType(typeof(VisualElement)));
-        });
-
-        private static readonly PropertyInfo BatchedProperty = typeof(VisualElement).GetProperty("Batched", BindingFlags.Instance | BindingFlags.NonPublic);
-
-        public static bool IsBatched(VisualElement element)
-        {
-            return (bool)(BatchedProperty?.GetValue(element) ?? false);
-        }
-
-        public static void AddBatchCommittedHandler(VisualElement element, object target, MethodInfo handler)
-            => BatchCommittedEvent.AddMethod.Invoke(element, new[] { handler.CreateDelegate(BatchHandlerType.Value, target) });
-        public static void RemoveBatchCommittedHandler(VisualElement element, object target, MethodInfo handler)
-            => BatchCommittedEvent.RemoveMethod.Invoke(element, new[] { handler.CreateDelegate(BatchHandlerType.Value, target) });
-
-        #endregion Batched Reflection access
-
-
         #region Handler Resolution
 
         private static readonly MethodInfo GetAssemblies = typeof(Device).GetMethod(nameof(GetAssemblies), BindingFlags.Static | BindingFlags.NonPublic);
@@ -85,8 +55,6 @@ namespace OliveTree.Transitions.Transitions
 
         #endregion
 
-        private static readonly MethodInfo BatchCommittedMethod = typeof(TransitionBase).GetMethod(nameof(BatchCommitted), BindingFlags.Instance | BindingFlags.NonPublic);
-
         private VisualElement _element;
         private bool _animating;
 
@@ -122,14 +90,14 @@ namespace OliveTree.Transitions.Transitions
         private void UnregisterHandlers(VisualElement element)
         {
             if (element == null) return;
-            RemoveBatchCommittedHandler(element, this, BatchCommittedMethod);
+            element.RemoveBatchCommittedHandler(this, nameof(BatchCommitted));
             element.PropertyChanging -= ElementOnPropertyChanging;
             element.PropertyChanged -= ElementOnPropertyChanged;
         }
         private void RegisterHandlers(VisualElement element)
         {
             if (element == null) return;
-            AddBatchCommittedHandler(element, this, BatchCommittedMethod);
+            element.AddBatchCommittedHandler(this, nameof(BatchCommitted));
             element.PropertyChanging += ElementOnPropertyChanging;
             element.PropertyChanged += ElementOnPropertyChanged;
         }
@@ -143,7 +111,7 @@ namespace OliveTree.Transitions.Transitions
 
                 if (value)                              //!_animating is implied from the first check
                     Transitioning?.Invoke(this, _animating = true);
-                else if (!IsBatched(Element))          //_animating is implied, already started a batched animation
+                else if (!(Element?.IsBatched() ?? false))          //_animating is implied, already started a batched animation
                     Transitioning?.Invoke(this, _animating = false);
             }
         }

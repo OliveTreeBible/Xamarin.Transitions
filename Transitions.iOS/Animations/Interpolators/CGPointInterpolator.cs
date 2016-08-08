@@ -1,7 +1,7 @@
 using CoreGraphics;
 using Foundation;
 
-namespace OliveTree.Animations.iOS.Interpolators
+namespace OliveTree.Transitions.iOS.Animations.Interpolators
 {
     public class PointInterpolator : IInterpolator<CGPoint>
     {

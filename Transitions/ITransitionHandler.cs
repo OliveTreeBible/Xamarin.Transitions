@@ -1,5 +1,4 @@
 ﻿using System;
-using OliveTree.Transitions.Transitions;
 
 namespace OliveTree.Transitions
 {

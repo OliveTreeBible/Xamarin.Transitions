@@ -1,13 +1,13 @@
 using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Animation;
 using Android.Runtime;
 using Android.Transitions;
 using Android.Views;
 
-namespace OliveTree.Animations.Droid
+namespace OliveTree.Transitions.Droid
 {
     public class ChangeRenderTransform : Transition
     {

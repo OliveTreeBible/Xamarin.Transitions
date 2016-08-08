@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using OliveTree.Transitions.Transitions;
 using Xamarin.Forms;
 
 namespace OliveTree.Transitions

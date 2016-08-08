@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Transitions", "Transitions\Transitions.xproj", "{FDD62A40-4006-41C9-8A7D-4BB3B4655230}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Transitions", "Transitions\Transitions.csproj", "{FDD62A40-4006-41C9-8A7D-4BB3B4655230}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Transitions.Droid", "Transitions.Droid\Transitions.Droid.csproj", "{0CD0B24E-D48B-4582-881C-B5366826E0A2}"
 EndProject

@@ -1,4 +1,4 @@
-namespace OliveTree.Animations
+namespace OliveTree.Transitions
 {
     public enum EasingMode
     {

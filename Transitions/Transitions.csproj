@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ProjectGuid>fdd62a40-4006-41c9-8a7d-4bb3b4655230</ProjectGuid>
-    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{fdd62a40-4006-41c9-8a7d-4bb3b4655230}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OliveTree.Transitions</RootNamespace>
     <AssemblyName>OliveTree.Transitions</AssemblyName>
-    <OutputPath>bin\$(Configuration)</OutputPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -27,7 +30,24 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="project.json" />
-    <Compile Include="**\*.cs" Exclude="bin\**\*.cs;obj\**\*.cs" />
+    <Compile Include="Curves\AnimationCurve.cs" />
+    <Compile Include="Curves\BackCurve.cs" />
+    <Compile Include="Curves\EasingCurve.cs" />
+    <Compile Include="Curves\ElasticCurve.cs" />
+    <Compile Include="Curves\ExponentialCurve.cs" />
+    <Compile Include="Curves\PowerCurve.cs" />
+    <Compile Include="Curves\Spring.cs" />
+    <Compile Include="Extensions\ReflectionExtensions.cs" />
+    <Compile Include="Easing.cs" />
+    <Compile Include="EdgeTransition.cs" />
+    <Compile Include="Interaction.cs" />
+    <Compile Include="ITransitionHandler.cs" />
+    <Compile Include="LayoutTransition.cs" />
+    <Compile Include="OpacityTransition.cs" />
+    <Compile Include="TransformTransition.cs" />
+    <Compile Include="TransitionBase.cs" />
+    <Compile Include="TransitionCollection.cs" />
+    <Compile Include="TransitionHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
