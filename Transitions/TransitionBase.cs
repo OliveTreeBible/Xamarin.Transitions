@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using OliveTree.Transitions.Curves;
 using OliveTree.Transitions.Extensions;
+using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using PropertyChangingEventArgs = Xamarin.Forms.PropertyChangingEventArgs;
 
@@ -14,47 +10,6 @@ namespace OliveTree.Transitions
 {
     public abstract class TransitionBase
     {
-        #region Handler Resolution
-
-        private static readonly MethodInfo GetAssemblies = typeof(Device).GetMethod(nameof(GetAssemblies), BindingFlags.Static | BindingFlags.NonPublic);
-        private static readonly Dictionary<Type, Type> ResolvedHandlers = new Dictionary<Type, Type>();
-
-        private static Type ResolveType(TransitionBase forTransition)
-        {
-            var sourceType = forTransition.GetType();
-
-            Type handlerType;
-            if (ResolvedHandlers.TryGetValue(sourceType, out handlerType))
-                return handlerType;
-
-            var handlerInterface = typeof(ITransitionHandler);
-            foreach (Type type in from assem in (Assembly[])GetAssemblies.Invoke(null, null)
-                from ti in assem.DefinedTypes
-                select ti.AsType())
-            {
-                if (!handlerInterface.IsAssignableFrom(type)) continue;
-
-                var attr = type.GetTypeInfo().GetCustomAttributes<TransitionHandler>()
-                    .FirstOrDefault(a => a.Handler.IsAssignableFrom(sourceType));
-                if (attr == null) continue;
-
-                return ResolvedHandlers[sourceType] = type;
-            }
-
-            return ResolvedHandlers[sourceType] = null;
-        }
-
-        private static ITransitionHandler Resolve(TransitionBase forTransition)
-        {
-            var type = ResolveType(forTransition);
-            if (type == null) return null;
-
-            var handler = Activator.CreateInstance(type);
-            return handler as ITransitionHandler;
-        }
-
-        #endregion
-
         private VisualElement _element;
         private bool _animating;
 
@@ -63,7 +18,7 @@ namespace OliveTree.Transitions
 
         protected TransitionBase()
         {
-            _handler = Resolve(this);
+            _handler = DependencyService.Get<ITransitionProvider>()?.Resolve(GetType());
         }
 
         protected abstract bool ShouldTransition(string propertyName);
@@ -90,14 +45,14 @@ namespace OliveTree.Transitions
         private void UnregisterHandlers(VisualElement element)
         {
             if (element == null) return;
-            element.RemoveBatchCommittedHandler(this, nameof(BatchCommitted));
+            element.RemoveBatchCommittedHandler(BatchCommitted);
             element.PropertyChanging -= ElementOnPropertyChanging;
             element.PropertyChanged -= ElementOnPropertyChanged;
         }
         private void RegisterHandlers(VisualElement element)
         {
             if (element == null) return;
-            element.AddBatchCommittedHandler(this, nameof(BatchCommitted));
+            element.AddBatchCommittedHandler(BatchCommitted);
             element.PropertyChanging += ElementOnPropertyChanging;
             element.PropertyChanged += ElementOnPropertyChanged;
         }
@@ -111,7 +66,7 @@ namespace OliveTree.Transitions
 
                 if (value)                              //!_animating is implied from the first check
                     Transitioning?.Invoke(this, _animating = true);
-                else if (!(Element?.IsBatched() ?? false))          //_animating is implied, already started a batched animation
+                else if (Element == null || !Element.IsBatched())          //_animating is implied, already started a batched animation
                     Transitioning?.Invoke(this, _animating = false);
             }
         }
@@ -145,7 +100,6 @@ namespace OliveTree.Transitions
             }
         }
 
-        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void BatchCommitted(object sender, EventArgs e)
         {
             IsAnimating = false;

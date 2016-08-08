@@ -6,7 +6,7 @@ using Android.Views;
 
 namespace OliveTree.Transitions.Droid
 {
-    public class ChangeAlpha : Transition
+    public class ChangeAlpha : Android.Transitions.Transition
     {
         private static readonly string PropertyName = $"com.olivetree:{nameof(ChangeAlpha)}:alpha";
 

@@ -7,20 +7,18 @@ using Android.Views;
 using OliveTree.Transitions.Curves;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Object = Java.Lang.Object;
 using View = Android.Views.View;
 
 namespace OliveTree.Transitions.Droid
 {
-    [TransitionHandler(typeof(LayoutTransition))]
-    [TransitionHandler(typeof(OpacityTransition))]
-    [TransitionHandler(typeof(TransformTransition))]
-    public class TransitionBase : ITransitionHandler
+    public class Transition : ITransitionHandler
     {
-        private Transitions.TransitionBase _transition;
+        private TransitionBase _transition;
 
         public event EventHandler Completed;
 
-        void ITransitionHandler.Attach(Transitions.TransitionBase transition)
+        void ITransitionHandler.Attach(TransitionBase transition)
         {
             if (ReferenceEquals(_transition, transition)) return;
 
@@ -33,13 +31,11 @@ namespace OliveTree.Transitions.Droid
                 _transition.Transitioning += OnTransitioning;
         }
 
-        private Transitions.TransitionBase Transition => _transition;
-
         protected ViewGroup Container
         {
             get
             {
-                var element = Transition?.Element;
+                var element = _transition?.Element;
                 return element != null
                     ? Platform.GetRenderer(element)?.ViewGroup
                     : null;
@@ -57,19 +53,19 @@ namespace OliveTree.Transitions.Droid
             trans.SetOrdering(TransitionOrdering.Together);
             trans.AddListener(new TransitionCompletion(this, container));
 
-            foreach (var t in BuildTransitions(Transition?.Element))
+            foreach (var t in BuildTransitions(_transition?.Element))
                 trans.AddTransition(t);
 
             TransitionManager.BeginDelayedTransition(container, trans);
         }
 
-        private static IEnumerable<Transition> BuildTransitions(VisualElement element)
+        private static IEnumerable<Android.Transitions.Transition> BuildTransitions(VisualElement element)
         {
             if (element == null) yield break;
 
-            foreach (var tb in Interaction.GetTransitions(element) ?? Enumerable.Empty<Transitions.TransitionBase>())
+            foreach (var tb in Interaction.GetTransitions(element) ?? Enumerable.Empty<TransitionBase>())
             {
-                Transition transition;
+                Android.Transitions.Transition transition;
                 if (tb is LayoutTransition)
                     transition = new ChangeBounds();
                 else if (tb is OpacityTransition)
@@ -97,13 +93,13 @@ namespace OliveTree.Transitions.Droid
             }
         }
 
-        private class TransitionCompletion : Java.Lang.Object, Transition.ITransitionListener
+        private class TransitionCompletion : Object, Android.Transitions.Transition.ITransitionListener
         {
-            private readonly TransitionBase _transition;
+            private readonly Transition _transition;
             private readonly View _container;
             private LayerType _startingType;
 
-            public TransitionCompletion(TransitionBase transition, View container)
+            public TransitionCompletion(Transition transition, View container)
             {
                 if (transition == null) throw new ArgumentNullException(nameof(transition));
                 if (container == null) throw new ArgumentNullException(nameof(container));
@@ -111,18 +107,18 @@ namespace OliveTree.Transitions.Droid
                 _container = container;
             }
 
-            public void OnTransitionStart(Transition transition)
+            public void OnTransitionStart(Android.Transitions.Transition transition)
             {
                 _startingType = _container.LayerType;
                 if (_startingType != LayerType.Hardware)
                     _container.SetLayerType(LayerType.Hardware, null);
             }
 
-            public void OnTransitionPause(Transition transition) { }
-            public void OnTransitionResume(Transition transition) { }
+            public void OnTransitionPause(Android.Transitions.Transition transition) { }
+            public void OnTransitionResume(Android.Transitions.Transition transition) { }
 
-            public void OnTransitionCancel(Transition transition) => Cleanup();
-            public void OnTransitionEnd(Transition transition) => Cleanup();
+            public void OnTransitionCancel(Android.Transitions.Transition transition) => Cleanup();
+            public void OnTransitionEnd(Android.Transitions.Transition transition) => Cleanup();
             private void Cleanup()
             {
                 if (_startingType != LayerType.Hardware)
@@ -131,7 +127,7 @@ namespace OliveTree.Transitions.Droid
             }
         }
 
-        private class CurveInterpolator : Java.Lang.Object, ITimeInterpolator
+        private class CurveInterpolator : Object, ITimeInterpolator
         {
             private readonly EasingCurve _curve;
 
@@ -143,7 +139,7 @@ namespace OliveTree.Transitions.Droid
             public float GetInterpolation(float input) => (float)_curve.Ease(input);
         }
 
-        private class SpringInterpolator : Java.Lang.Object, ITimeInterpolator
+        private class SpringInterpolator : Object, ITimeInterpolator
         {
             internal const int FramesPerSecond = 60 * 4; //Probably need more than the 60 refresh rate, but 4 per frame may be excessive
             private readonly double[] _steps;

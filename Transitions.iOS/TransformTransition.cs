@@ -7,7 +7,6 @@ using Xamarin.Forms;
 
 namespace OliveTree.Transitions.iOS
 {
-    [TransitionHandler(typeof(Transitions.TransformTransition))]
     public class TransformTransition : TransitionBase
     {
         private Transform _start;

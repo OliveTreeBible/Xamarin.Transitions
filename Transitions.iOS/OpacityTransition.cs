@@ -3,7 +3,6 @@ using UIKit;
 
 namespace OliveTree.Transitions.iOS
 {
-    [TransitionHandler(typeof(Transitions.OpacityTransition))]
     public class OpacityTransition : TransitionBase
     {
         private float? _start;

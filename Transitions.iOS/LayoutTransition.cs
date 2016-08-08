@@ -5,7 +5,6 @@ using UIKit;
 
 namespace OliveTree.Transitions.iOS
 {
-    [TransitionHandler(typeof(Transitions.LayoutTransition))]
     public class LayoutTransition : TransitionBase
     {
         private CGRect _start;

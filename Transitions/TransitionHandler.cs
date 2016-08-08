@@ -2,14 +2,15 @@
 
 namespace OliveTree.Transitions
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public sealed class TransitionHandler : Attribute
+    public interface ITransitionHandler
     {
-        public Type Handler { get; }
+        event EventHandler Completed;
+        void Attach(TransitionBase transition);
+    }
 
-        public TransitionHandler(Type handler)
-        {
-            Handler = handler;
-        }
+    public interface ITransitionProvider
+    {
+        ITransitionHandler Resolve<T>() where T : TransitionBase;
+        ITransitionHandler Resolve(Type transitionType);
     }
 }

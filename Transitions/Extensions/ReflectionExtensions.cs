@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace OliveTree.Transitions.Extensions
@@ -28,22 +25,16 @@ namespace OliveTree.Transitions.Extensions
 
         private static readonly PropertyInfo BatchedProperty = typeof(VisualElement).GetProperty("Batched", BindingFlags.Instance | BindingFlags.NonPublic);
 
-        private static Delegate CreateDelegate(object target, string method) => target.GetType()
-            .GetMethod(method, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)?
-            .CreateDelegate(BatchHandlerType.Value, target);
+        private static Delegate TransformDelegate(Delegate @delegate) => @delegate.GetMethodInfo().CreateDelegate(BatchHandlerType.Value, @delegate.Target);
 
         #endregion Batched Reflection access
 
         public static bool IsBatched(this VisualElement element) => (bool)(BatchedProperty?.GetValue(element) ?? false);
 
-        public static void AddBatchCommittedHandler(this VisualElement element, object target, string method)
-            => BatchCommittedEvent.AddMethod.Invoke(element, new object[] { CreateDelegate(target, method) });
+        public static void AddBatchCommittedHandler(this VisualElement element, EventHandler @delegate)
+            => BatchCommittedEvent.AddMethod.Invoke(element, new object[] { TransformDelegate(@delegate) });
 
-        public static void RemoveBatchCommittedHandler(this VisualElement element, object target, string method)
-            => BatchCommittedEvent.RemoveMethod.Invoke(element, new object[] { CreateDelegate(target, method) });
-
-
-        private static readonly MethodInfo GetAssemblies = typeof(Device).GetMethod(nameof(GetAssemblies), BindingFlags.Static | BindingFlags.NonPublic);
-        public static Assembly[] GetHandlerAssemblies(this Element element) => (Assembly[])GetAssemblies.Invoke(null, null);
+        public static void RemoveBatchCommittedHandler(this VisualElement element, EventHandler @delegate)
+            => BatchCommittedEvent.RemoveMethod.Invoke(element, new object[] { TransformDelegate(@delegate) });
     }
 }

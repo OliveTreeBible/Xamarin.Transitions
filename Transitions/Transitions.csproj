@@ -5,7 +5,7 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{fdd62a40-4006-41c9-8a7d-4bb3b4655230}</ProjectGuid>
+    <ProjectGuid>{FDD62A40-4006-41C9-8A7D-4BB3B4655230}</ProjectGuid>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -15,8 +15,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,7 +29,9 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="TransitionsLibrary.cs" />
     <None Include="project.json" />
+    <Compile Include="Animations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Curves\AnimationCurve.cs" />
     <Compile Include="Curves\BackCurve.cs" />
@@ -42,7 +44,6 @@
     <Compile Include="Easing.cs" />
     <Compile Include="EdgeTransition.cs" />
     <Compile Include="Interaction.cs" />
-    <Compile Include="ITransitionHandler.cs" />
     <Compile Include="LayoutTransition.cs" />
     <Compile Include="OpacityTransition.cs" />
     <Compile Include="TransformTransition.cs" />

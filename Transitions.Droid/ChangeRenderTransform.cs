@@ -9,7 +9,7 @@ using Android.Views;
 
 namespace OliveTree.Transitions.Droid
 {
-    public class ChangeRenderTransform : Transition
+    public class ChangeRenderTransform : Android.Transitions.Transition
     {
         private const string Prefix = "com.olivetree:" + nameof(ChangeRenderTransform);
         private const string PivotX = "pivotX";

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0cd0b24e-d48b-4582-881c-b5366826e0a2}</ProjectGuid>
+    <ProjectGuid>{0CD0B24E-D48B-4582-881C-B5366826E0A2}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -33,7 +33,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <ProjectReference Include="..\Transitions\Transitions.csproj" >
+    <ProjectReference Include="..\Transitions\Transitions.csproj">
       <Project>{fdd62a40-4006-41c9-8a7d-4bb3b4655230}</Project>
       <Name>Transitions</Name>
     </ProjectReference>
@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChangeAlpha.cs" />
     <Compile Include="ChangeRenderTransform.cs" />
+    <Compile Include="Provider.cs" />
     <Compile Include="Transition.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
