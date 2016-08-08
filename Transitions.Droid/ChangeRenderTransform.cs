@@ -9,7 +9,7 @@ using Android.Views;
 
 namespace OliveTree.Transitions.Droid
 {
-    public class ChangeRenderTransform : Android.Transitions.Transition
+    public class ChangeRenderTransform : DelayedTransition
     {
         private const string Prefix = "com.olivetree:" + nameof(ChangeRenderTransform);
         private const string PivotX = "pivotX";
@@ -22,10 +22,8 @@ namespace OliveTree.Transitions.Droid
         private const string TranslationX = "translationX";
         private const string TranslationY = "translationY";
 
-        // ReSharper disable UnusedMember.Global
-        public ChangeRenderTransform() { }
+        public ChangeRenderTransform(TransitionBase transition) : base(transition) { }
         public ChangeRenderTransform(IntPtr ptr, JniHandleOwnership own) : base(ptr, own) { }
-        // ReSharper restore UnusedMember.Global
 
         public override void CaptureStartValues(TransitionValues transitionValues) => CaptureValues(transitionValues);
         public override void CaptureEndValues(TransitionValues transitionValues) => CaptureValues(transitionValues);

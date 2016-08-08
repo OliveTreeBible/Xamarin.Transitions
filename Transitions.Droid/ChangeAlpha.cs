@@ -6,14 +6,12 @@ using Android.Views;
 
 namespace OliveTree.Transitions.Droid
 {
-    public class ChangeAlpha : Android.Transitions.Transition
+    public class ChangeAlpha : DelayedTransition
     {
         private static readonly string PropertyName = $"com.olivetree:{nameof(ChangeAlpha)}:alpha";
 
-        // ReSharper disable UnusedMember.Global
-        public ChangeAlpha() { }
+        public ChangeAlpha(TransitionBase transition) : base(transition) { }
         public ChangeAlpha(IntPtr ptr, JniHandleOwnership own) : base(ptr, own) { }
-        // ReSharper restore UnusedMember.Global
 
         public override void CaptureStartValues(TransitionValues transitionValues) => CaptureValues(transitionValues);
         public override void CaptureEndValues(TransitionValues transitionValues) => CaptureValues(transitionValues);

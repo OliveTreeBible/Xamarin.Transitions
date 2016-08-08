@@ -67,27 +67,13 @@ namespace OliveTree.Transitions.Droid
             {
                 Android.Transitions.Transition transition;
                 if (tb is LayoutTransition)
-                    transition = new ChangeBounds();
+                    transition = new ChangeBounds(tb);
                 else if (tb is OpacityTransition)
-                    transition = new ChangeAlpha();
+                    transition = new ChangeAlpha(tb);
                 else if (tb is TransformTransition)
-                    transition = new ChangeRenderTransform();
+                    transition = new ChangeRenderTransform(tb);
                 else
                     continue;
-
-                var spring = tb.Curve as Spring;
-                if (spring != null)
-                {
-                    const int framesPerSecond = SpringInterpolator.FramesPerSecond;
-                    var seconds = spring.Steps(framesPerSecond).Count() / (double)framesPerSecond;
-                    transition.SetDuration((long)(seconds * 1000));
-                    transition.SetInterpolator(new SpringInterpolator(spring));
-                }
-                else if (tb.Curve is EasingCurve)
-                {
-                    transition.SetDuration((long)tb.Duration.TotalMilliseconds);
-                    transition.SetInterpolator(new CurveInterpolator((EasingCurve)tb.Curve));
-                }
 
                 yield return transition;
             }
@@ -124,37 +110,6 @@ namespace OliveTree.Transitions.Droid
                 if (_startingType != LayerType.Hardware)
                     _container.SetLayerType(_startingType, null);
                 _transition.Completed?.Invoke(_transition, EventArgs.Empty);
-            }
-        }
-
-        private class CurveInterpolator : Object, ITimeInterpolator
-        {
-            private readonly EasingCurve _curve;
-
-            public CurveInterpolator(EasingCurve curve)
-            {
-                _curve = curve;
-            }
-
-            public float GetInterpolation(float input) => (float)_curve.Ease(input);
-        }
-
-        private class SpringInterpolator : Object, ITimeInterpolator
-        {
-            internal const int FramesPerSecond = 60 * 4; //Probably need more than the 60 refresh rate, but 4 per frame may be excessive
-            private readonly double[] _steps;
-
-            public SpringInterpolator(Spring curve)
-            {
-                _steps = curve.Steps(FramesPerSecond).ToArray();
-            }
-
-            public float GetInterpolation(float input)
-            {
-                var rawFrame = input * _steps.Length;
-
-                var idxA = Math.Max(Math.Min((int)rawFrame, _steps.Length - 1), 0);
-                return (float)_steps[idxA];
             }
         }
     }
