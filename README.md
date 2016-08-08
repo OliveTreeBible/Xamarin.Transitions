@@ -17,7 +17,7 @@ xmlns:trans="clr-namespace:OliveTree.Transitions;assembly=OliveTree.Transitions"
   <Grid.Triggers>
     <DataTrigger Binding="{Binding IsProcessing}" Value="False" TargetType="Grid" >
       <Setter Property="Opacity" Value="0" />
-    </DataTrigger
+    </DataTrigger>
   </Grid.Triggers>
 </Grid>
 ```
