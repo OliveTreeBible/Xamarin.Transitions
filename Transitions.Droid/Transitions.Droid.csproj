@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChangeAlpha.cs" />
     <Compile Include="ChangeRenderTransform.cs" />
     <Compile Include="Transition.cs" />

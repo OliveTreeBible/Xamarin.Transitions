@@ -30,6 +30,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="project.json" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Curves\AnimationCurve.cs" />
     <Compile Include="Curves\BackCurve.cs" />
     <Compile Include="Curves\EasingCurve.cs" />
