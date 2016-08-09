@@ -7,7 +7,7 @@ Project | Link
 Common | [![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions/)
 Android | [![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.Droid.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions.Droid/)
 iOS | [![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.iOS.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions.iOS/)
-
+Other | At this point, platform implementations have only been done for Android and iOS. UWP is my personal highest priority, but it and other platforms may require community work.
 
 
 ## Example
