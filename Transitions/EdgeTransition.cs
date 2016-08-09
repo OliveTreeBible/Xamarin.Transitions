@@ -7,7 +7,7 @@ namespace OliveTree.Transitions
     public class EdgeTransition : LayoutTransition
     {
         private static readonly AnimationCurve Enter = new Spring { Friction = 5 };
-        private static readonly AnimationCurve Exit = new BackCurve { Amplitude = 0.25d, Mode = EasingMode.In };
+        private static readonly AnimationCurve Exit = new EasingCurve { Easing = Easing.Cubic, Mode = EasingMode.In };
 
         public override TimeSpan Duration { get; set; } = TimeSpan.FromMilliseconds(400);
         public override AnimationCurve Curve
