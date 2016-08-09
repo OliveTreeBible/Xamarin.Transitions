@@ -2,12 +2,14 @@
   "dependencies": {
     "System.ComponentModel": "4.0.1",
     "System.Reflection.TypeExtensions": "4.1.0",
-    "Xamarin.Forms": "2.3.0.49",
-    "NETStandard.Library": "1.6.0"
+    "Xamarin.Forms": "2.3.0.49"
   },
   "frameworks": {
     "netstandard1.3": {
-      "imports": "portable-monoandroid10+monotouch10+net45+win+win81+wp8+wpa81+xamarinios10"
+      "imports": "portable-monoandroid10+monotouch10+net45+win+win81+wp8+wpa81+xamarinios10",
+      "dependencies": {
+        "NETStandard.Library": "1.6.0"
+      }
     }
   }
 }

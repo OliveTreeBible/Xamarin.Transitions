@@ -5,7 +5,6 @@ using System.Reflection;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("OliveTree Transitions - iOS")]
-[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Olive Tree Bible Software")]
 [assembly: AssemblyProduct("OliveTree.Transitions")]

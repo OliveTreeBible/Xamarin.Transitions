@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>OliveTree.Transitions.iOS</id>
     <version>$version$</version>
-    <authors>$author$</authors>
+    <authors>Olive Tree Bible Software, Inc.</authors>
     <licenseUrl>https://github.com/OliveTreeBible/Xamarin.Transitions/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/OliveTreeBible/Xamarin.Transitions</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
