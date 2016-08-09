@@ -1,8 +1,4 @@
 {
-  "version": "1.0.0-*",
-  "buildOptions": {
-    "debugType": "portable"
-  },
   "dependencies": {
     "Xamarin.Forms": "2.3.0.49"
   },
