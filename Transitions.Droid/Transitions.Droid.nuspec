@@ -11,5 +11,11 @@
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags></tags>
+    <dependencies>
+      <dependency id="OliveTree.Transitions" version="$version$" />
+    </dependencies>
   </metadata>
+  <files>
+    <file src="bin\Release\OliveTree.Transitions.Droid.*" target="lib\monoandroid60" />
+  </files>
 </package>
