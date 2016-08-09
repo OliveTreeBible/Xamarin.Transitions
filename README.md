@@ -1,8 +1,13 @@
 # Xamarin Transitions
-Declarative & implicit animations Library for Xamarin Forms.
+Declarative & implicit animations Library for Xamarin Forms. [![Build status](https://ci.appveyor.com/api/projects/status/7lfhk01r687406dh?svg=true)](https://ci.appveyor.com/project/adamhewitt627/xamarin-transitions)
 
-[![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions/)
-[![Build status](https://ci.appveyor.com/api/projects/status/7lfhk01r687406dh?svg=true)](https://ci.appveyor.com/project/adamhewitt627/xamarin-transitions)
+### Nuget Packages
+Project | Link
+------- | ----
+Common | [![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions/)
+Android | [![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.Droid.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions.Droid/)
+iOS | [![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.iOS.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions.iOS/)
+
 
 
 ## Example
@@ -29,4 +34,11 @@ xmlns:trans="clr-namespace:OliveTree.Transitions;assembly=OliveTree.Transitions"
 Or triggered in code-behind:
 ```C#
 StatusIndicator.Opacity = 0;
+```
+
+## Setup
+For the common implementation to resolve platform animations, it must be given an `ITransitionProvider`. Each platform has one built in, but you are welcome to override it should needs arise. Generally, you will initialize it with:
+```C#
+Forms.Init();
+TransitionsLibrary.Register<Provider>();
 ```
