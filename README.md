@@ -9,6 +9,8 @@ Android | [![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.D
 iOS | [![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.iOS.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions.iOS/)
 Other | At this point, platform implementations have only been done for Android and iOS. UWP is my personal highest priority, but it and other platforms may require community work.
 
+## Why Not `Xamarin.Forms.Animation`?
+Xamarin Forms provides a common animation API, especially powerful with its `async`/`await` structure and extensibility. For many apps, it may be all that is necessary. **However**, it operates by setting up its own timing and modifying native view propertiies as it goes. This means the platform's hardware acceleration around animations can't be leveraged. Our experience was a sluggish feel that didn't "pop" the way a native app would.
 
 ## Example
 To automatically animate the opacity of an element, simply add the transition to its attached property. Any property changes will then be animated according to the declaration.
