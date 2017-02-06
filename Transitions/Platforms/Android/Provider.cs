@@ -15,6 +15,6 @@ namespace OliveTree.Transitions.Droid
     public class Provider : ITransitionProvider
     {
         public ITransitionHandler Resolve<T>() where T : TransitionBase => Resolve(typeof(T));
-        public ITransitionHandler Resolve(Type transitionType) => new Transition();
+        public virtual ITransitionHandler Resolve(Type transitionType) => new Transition();
     }
 }

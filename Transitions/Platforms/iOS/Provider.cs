@@ -15,7 +15,7 @@ namespace OliveTree.Transitions.iOS
 
         public ITransitionHandler Resolve<T>() where T : Transitions.TransitionBase => Resolve(typeof(T));
 
-        public ITransitionHandler Resolve(Type transitionType)
+        public virtual ITransitionHandler Resolve(Type transitionType)
         {
             Type handlerType;
             if (!Handlers.TryGetValue(transitionType, out handlerType))

@@ -1,54 +1,85 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+
   <PropertyGroup>
-    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FDD62A40-4006-41C9-8A7D-4BB3B4655230}</ProjectGuid>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>netstandard1.4;Xamarin.iOS10;MonoAndroid71</TargetFrameworks><!--;uap10.0-->
+    <PackageTargetFallback>$(PackageTargetFallback);portable-monoandroid10+net45+win+win81+wp8+wpa81+xamarinios10+xamarinmac20</PackageTargetFallback>
     <RootNamespace>OliveTree.Transitions</RootNamespace>
     <AssemblyName>OliveTree.Transitions</AssemblyName>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <Copyright>Copyright 2016</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <MtouchDebug>true</MtouchDebug>
+
+  <PropertyGroup Label="NuGet">
+    <Authors>Olive Tree Bible Software, Inc.</Authors>
+    <Description>Implicit &amp; declarative Animations library for Xamarin Forms.</Description>
+    <PackageLicenseUrl>https://github.com/OliveTreeBible/Xamarin.Transitions/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/OliveTreeBible/Xamarin.Transitions</PackageProjectUrl>
+    <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="TransitionsLibrary.cs" />
-    <None Include="project.json" />
-    <Compile Include="Animations.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Curves\AnimationCurve.cs" />
-    <Compile Include="Curves\BackCurve.cs" />
-    <Compile Include="Curves\EasingCurve.cs" />
-    <Compile Include="Curves\ElasticCurve.cs" />
-    <Compile Include="Curves\ExponentialCurve.cs" />
-    <Compile Include="Curves\PowerCurve.cs" />
-    <Compile Include="Curves\Spring.cs" />
-    <Compile Include="Extensions\ReflectionExtensions.cs" />
-    <Compile Include="Easing.cs" />
-    <Compile Include="EdgeTransition.cs" />
-    <Compile Include="Interaction.cs" />
-    <Compile Include="LayoutTransition.cs" />
-    <Compile Include="OpacityTransition.cs" />
-    <Compile Include="TransformTransition.cs" />
-    <Compile Include="TransitionBase.cs" />
-    <Compile Include="TransitionCollection.cs" />
-    <Compile Include="TransitionHandler.cs" />
+    <PackageReference Include="Xamarin.Forms" Version="2.3.3.180" />
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+    <Compile Include="**\*.cs" Exclude="Platforms\**;bin\**;obj\**" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+
+  <Choose>
+    <!--<When Condition="'$(TargetFramework)' == 'uap10.0'">
+      <PropertyGroup>
+        <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+        <NugetTargetMoniker>UAP,Version=v10.0</NugetTargetMoniker>
+        <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+        <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+        <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+        <TargetFrameworkIdentifier>.NETCore</TargetFrameworkIdentifier>
+        <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+        <DefineConstants>$(DefineConstants);WINDOWS_UWP</DefineConstants>
+        <LanguageTargets>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</LanguageTargets>
+      </PropertyGroup>
+      <ItemGroup>
+        <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform " Version="5.2.2" />
+        <Compile Include="Platforms\UAP\**\*.cs" />
+      </ItemGroup>
+    </When>-->
+    <When Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
+      <PropertyGroup>
+        <TargetFrameworkIdentifier>Xamarin.iOS</TargetFrameworkIdentifier>
+        <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+        <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+        <DefineConstants>$(DefineConstants);COCOA_COMMON</DefineConstants>
+        <DebugType>full</DebugType>
+        <LanguageTargets>$(MSBuildProgramFiles32)\MSBuild\Xamarin\iOS\Xamarin.iOS.CSharp.targets</LanguageTargets>
+      </PropertyGroup>
+      <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Runtime.Serialization" />
+        <Reference Include="Xamarin.iOS" />
+        <Compile Include="Platforms\iOS\**\*.cs" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'MonoAndroid71'">
+      <PropertyGroup>
+        <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+        <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+        <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+        <DebugType>full</DebugType>
+        <DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
+        <LanguageTargets>$(MSBuildProgramFiles32)\MSBuild\Xamarin\Android\Xamarin.Android.CSharp.targets</LanguageTargets>
+      </PropertyGroup>
+      <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Runtime" />
+        <Reference Include="System.Runtime.Serialization" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="Mono.Android" />
+        <Compile Include="Platforms\Android\**\*.cs" />
+      </ItemGroup>
+    </When>
+  </Choose>
 </Project>
