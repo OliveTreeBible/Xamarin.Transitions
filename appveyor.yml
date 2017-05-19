@@ -1,4 +1,5 @@
 version: 1.0.0.{build}
+image: Visual Studio 2017
 configuration: Release
 assembly_info:
   patch: true
@@ -9,17 +10,10 @@ assembly_info:
 nuget:
   project_feed: true
   disable_publish_on_pr: true
-before_build:
-- ps: >-
-    iwr https://dist.nuget.org/win-x86-commandline/v3.5.0-beta2/NuGet.exe -OutFile nuget.exe
-
-    .\nuget.exe restore
-build:
-  verbosity: minimal
-after_build:
-- ps: ls -r *.nuspec | % { .\nuget.exe pack -sym $_ -Version $env:appveyor_build_version }
+build_script:
+- ps: msbuild -t:Restore,Build,Pack -p:Configuration=Release,IncludeSymbols=true,PackageVersion=$env:appveyor_build_version
 artifacts:
-- path: '*.nupkg'
+- path: '**/*.nupkg'
 deploy:
 - provider: NuGet
   api_key:
