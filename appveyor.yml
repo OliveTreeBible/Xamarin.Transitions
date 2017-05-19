@@ -11,9 +11,9 @@ nuget:
   project_feed: true
   disable_publish_on_pr: true
 build_script:
-- ps: msbuild -t:Restore,Build,Pack -p:Configuration=Release,IncludeSymbols=true,PackageVersion=$env:appveyor_build_version
+- ps: msbuild Transitions\Transitions.csproj -t:Restore,Build,Pack -p:Configuration=Release,IncludeSymbols=true,PackageVersion=$env:appveyor_build_version
 artifacts:
-- path: '**/*.nupkg'
+- path: '**\*.nupkg'
 deploy:
 - provider: NuGet
   api_key:
