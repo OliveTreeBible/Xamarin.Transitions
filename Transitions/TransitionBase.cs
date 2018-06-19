@@ -1,9 +1,9 @@
 using OliveTree.Transitions.Curves;
-using OliveTree.Transitions.Extensions;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using PropertyChangingEventArgs = Xamarin.Forms.PropertyChangingEventArgs;
 
 namespace OliveTree.Transitions
@@ -45,14 +45,14 @@ namespace OliveTree.Transitions
         private void UnregisterHandlers(VisualElement element)
         {
             if (element == null) return;
-            element.RemoveBatchCommittedHandler(BatchCommitted);
+            element.BatchCommitted -= BatchCommitted;
             element.PropertyChanging -= ElementOnPropertyChanging;
             element.PropertyChanged -= ElementOnPropertyChanged;
         }
         private void RegisterHandlers(VisualElement element)
         {
             if (element == null) return;
-            element.AddBatchCommittedHandler(BatchCommitted);
+            element.BatchCommitted += BatchCommitted;
             element.PropertyChanging += ElementOnPropertyChanging;
             element.PropertyChanged += ElementOnPropertyChanged;
         }
@@ -66,7 +66,7 @@ namespace OliveTree.Transitions
 
                 if (value)                              //!_animating is implied from the first check
                     Transitioning?.Invoke(this, _animating = true);
-                else if (Element == null || !Element.IsBatched())          //_animating is implied, already started a batched animation
+                else if (Element == null || !Element.Batched)          //_animating is implied, already started a batched animation
                     Transitioning?.Invoke(this, _animating = false);
             }
         }
@@ -100,7 +100,7 @@ namespace OliveTree.Transitions
             }
         }
 
-        private void BatchCommitted(object sender, EventArgs e)
+        private void BatchCommitted(object sender, EventArg<VisualElement> e)
         {
             IsAnimating = false;
         }
@@ -114,18 +114,18 @@ namespace OliveTree.Transitions
             }
 
             var tcs = new TaskCompletionSource<bool>();
-            EventHandler handler = null;
-            handler = (_, __) =>
-            {
-                _handler.Completed -= handler;
-                tcs.TrySetResult(true);
-            };
 
-            _handler.Completed += handler;
+            _handler.Completed += Handler;
             _handler.Attach(this);
 
             action();
             return tcs.Task;
+
+            void Handler(object _, EventArgs __)
+            {
+                _handler.Completed -= Handler;
+                tcs.TrySetResult(true);
+            }
         }
     }
 }
