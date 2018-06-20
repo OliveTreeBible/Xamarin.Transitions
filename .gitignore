@@ -13,3 +13,4 @@ restore.dg
 *.nuget.targets
 *.nupkg
 *.zip
+*.vs

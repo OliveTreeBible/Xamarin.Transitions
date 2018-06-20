@@ -37,7 +37,7 @@ namespace OliveTree.Transitions.Droid
             {
                 var element = _transition?.Element;
                 return element != null
-                    ? Platform.GetRenderer(element)?.ViewGroup
+                    ? Platform.GetRenderer(element)?.View as ViewGroup
                     : null;
             }
         }
