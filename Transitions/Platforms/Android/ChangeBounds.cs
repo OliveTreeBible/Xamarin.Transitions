@@ -12,8 +12,7 @@ namespace OliveTree.Transitions.Droid
 
         public ChangeBounds(TransitionBase transition)
         {
-            if (transition == null) throw new ArgumentNullException(nameof(transition));
-            _transition = transition;
+            _transition = transition ?? throw new ArgumentNullException(nameof(transition));
         }
 
         public ChangeBounds(IntPtr ptr, JniHandleOwnership own) : base(ptr, own) { }

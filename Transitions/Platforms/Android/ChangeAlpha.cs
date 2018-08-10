@@ -30,7 +30,11 @@ namespace OliveTree.Transitions.Droid
             if (start == end) return null;
 
             var anim = ValueAnimator.OfFloat(start, end);
-            anim.Update += (_, args) => view.Alpha = (float)args.Animation.AnimatedValue;
+            anim.Update += (_, args) =>
+            {
+                if (view.IsDisposed()) return;
+                view.Alpha = (float) args.Animation.AnimatedValue;
+            };
 
             return anim;
         }
