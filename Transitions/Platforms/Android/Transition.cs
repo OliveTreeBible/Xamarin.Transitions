@@ -87,16 +87,14 @@ namespace OliveTree.Transitions.Droid
 
             public TransitionCompletion(Transition transition, View container)
             {
-                if (transition == null) throw new ArgumentNullException(nameof(transition));
-                if (container == null) throw new ArgumentNullException(nameof(container));
-                _transition = transition;
-                _container = container;
+                _transition = transition ?? throw new ArgumentNullException(nameof(transition));
+                _container = container ?? throw new ArgumentNullException(nameof(container));
             }
 
             public void OnTransitionStart(Android.Transitions.Transition transition)
             {
                 _startingType = _container.LayerType;
-                if (_startingType != LayerType.Hardware)
+                if (_startingType != LayerType.Hardware && !_container.IsDisposed())
                     _container.SetLayerType(LayerType.Hardware, null);
             }
 
@@ -107,7 +105,7 @@ namespace OliveTree.Transitions.Droid
             public void OnTransitionEnd(Android.Transitions.Transition transition) => Cleanup();
             private void Cleanup()
             {
-                if (_startingType != LayerType.Hardware)
+                if (_startingType != LayerType.Hardware && !_container.IsDisposed())
                     _container.SetLayerType(_startingType, null);
                 _transition.Completed?.Invoke(_transition, EventArgs.Empty);
             }

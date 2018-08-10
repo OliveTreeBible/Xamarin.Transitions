@@ -11,8 +11,7 @@ namespace OliveTree.Transitions.Droid
         protected DelayedTransition(IntPtr ptr, JniHandleOwnership own) : base(ptr, own) { }
         protected DelayedTransition(TransitionBase transition)
         {
-            if (transition == null) throw new ArgumentNullException(nameof(transition));
-            _transition = transition;
+            _transition = transition ?? throw new ArgumentNullException(nameof(transition));
         }
 
         public override ITimeInterpolator Interpolator => _transition.GetInterpolator();

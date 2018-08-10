@@ -38,12 +38,12 @@ namespace OliveTree.Transitions.iOS
         private void OnTransitioning(object sender, bool transitioning)
         {
             var r = Renderer;
-            if (r == null) return;
+            if (r == null || r.IsDisposed()) return;
 
             if (transitioning)
             {
                 /* TODO - it would appear that to customize easing (and have it per-transition) we need to:
-                 *      1. Implement Began/Ending on each transition to configure a CAAnimation
+                 *      1. Implement Begin/Ending on each transition to configure a CAAnimation
                  *      2. Add animations to the layer in Began (before the property has changed)
                  *      3. Remove the UIView.Begin/Commit code from here.
                  */
