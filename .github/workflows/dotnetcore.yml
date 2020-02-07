@@ -13,9 +13,8 @@ jobs:
       uses: warrenbuckley/Setup-MSBuild@v1
 
     - name: Build
-      run: msbuild Transitions\Transitions.csproj -t:Restore,Build -p:Configuration=Release
+      run: msbuild -t:Restore,Build,Pack -p:Configuration=Release,IncludeSymbols=true
 
     - name: Deploy
       if: github.ref == 'refs/heads/master'
-      run: msbuild Transitions\Transitions.csproj -t:Pack -p:Configuration=Release,IncludeSymbols=true
-    
+      run: dotnet nuget push **\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
