@@ -85,7 +85,7 @@ namespace OliveTree.Transitions
                 case "Renderer":
                     var element = Element;
                     if (element == null) return;
-                    
+
                     //We want our handlers after the renderer, so re-register
                     UnregisterHandlers(element);
                     RegisterHandlers(element);
@@ -105,12 +105,14 @@ namespace OliveTree.Transitions
             IsAnimating = false;
         }
 
-        public Task Animate(Action action)
+        public async Task Animate(Action action)
         {
+            if (action is null) throw new ArgumentNullException(nameof(action));
+
             if (_handler == null)
             {
                 action();
-                return Task.FromResult(0);
+                return;
             }
 
             var tcs = new TaskCompletionSource<bool>();
@@ -119,7 +121,7 @@ namespace OliveTree.Transitions
             _handler.Attach(this);
 
             action();
-            return tcs.Task;
+            await tcs.Task.ConfigureAwait(false);
 
             void Handler(object _, EventArgs __)
             {

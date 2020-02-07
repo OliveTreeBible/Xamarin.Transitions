@@ -17,8 +17,10 @@ namespace OliveTree.Animations.iOS
     public class EasingAnimation : CAKeyFrameAnimation
     {
 #if DEBUG
+#pragma warning disable CA1401 // P/Invokes should not be visible
         [System.Runtime.InteropServices.DllImport(ObjCRuntime.Constants.UIKitLibrary, EntryPoint = "UIAnimationDragCoefficient")]
         protected internal static extern float DragCoefficient();
+#pragma warning restore CA1401 // P/Invokes should not be visible
 #else
         protected internal static nfloat DragCoefficient() => 1.0f;
 #endif

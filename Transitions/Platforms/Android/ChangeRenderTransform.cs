@@ -23,10 +23,19 @@ namespace OliveTree.Transitions.Droid
         private const string TranslationY = "translationY";
 
         public ChangeRenderTransform(TransitionBase transition) : base(transition) { }
-        public ChangeRenderTransform(IntPtr ptr, JniHandleOwnership own) : base(ptr, own) { }
+        public ChangeRenderTransform(IntPtr handle, JniHandleOwnership own) : base(handle, own) { }
 
-        public override void CaptureStartValues(TransitionValues transitionValues) => CaptureValues(transitionValues);
-        public override void CaptureEndValues(TransitionValues transitionValues) => CaptureValues(transitionValues);
+        public override void CaptureStartValues(TransitionValues transitionValues)
+        {
+            if (transitionValues is null) throw new ArgumentNullException(nameof(transitionValues));
+            CaptureValues(transitionValues);
+        }
+
+        public override void CaptureEndValues(TransitionValues transitionValues)
+        {
+            if (transitionValues is null) throw new ArgumentNullException(nameof(transitionValues));
+            CaptureValues(transitionValues);
+        }
 
         private static void Capture(IDictionary values, string property, object value) => values[$"{Prefix}:{property}"] = value;
         private static void CaptureValues(TransitionValues values)

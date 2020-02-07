@@ -13,6 +13,8 @@ namespace OliveTree.Transitions.Droid
 
         public static ITimeInterpolator GetInterpolator(this TransitionBase transition)
         {
+            if (transition is null) throw new ArgumentNullException(nameof(transition));
+
             var spring = transition.Curve as Spring;
             if (spring != null) return new SpringInterpolator(spring);
 
@@ -22,8 +24,9 @@ namespace OliveTree.Transitions.Droid
 
         public static long CalculateDuration(this TransitionBase transition)
         {
-            var spring = transition.Curve as Spring;
-            if (spring != null)
+            if (transition is null) throw new ArgumentNullException(nameof(transition));
+
+            if (transition.Curve is Spring spring)
             {
                 const int framesPerSecond = FramesPerSecond;
                 var seconds = spring.Steps(framesPerSecond).Count() / (double)framesPerSecond;

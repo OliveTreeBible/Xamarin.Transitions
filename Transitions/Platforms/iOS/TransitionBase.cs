@@ -65,7 +65,9 @@ namespace OliveTree.Transitions.iOS
         {
             var curve = Transition?.Curve ?? new EasingCurve();
 
+#pragma warning disable CA2000 // Dispose objects before losing scope
             var animation = CreateAnimation(curve, interpolator);
+#pragma warning restore CA2000 // Dispose objects before losing scope
             animation.KeyPath = keyPath;
             animation.Duration = Transition?.Duration.TotalSeconds ?? 0.25f;
             animation.AnimationStopped += AnimationStopped;

@@ -9,43 +9,53 @@ namespace OliveTree.Transitions
         public static readonly BindableProperty TransitionsProperty = BindableProperty.CreateAttached("Transitions", typeof(TransitionCollection), typeof(Interaction),
             default(TransitionCollection), propertyChanged: PropertyChanged);
 
-        public static TransitionCollection GetTransitions(BindableObject @object)
+        public static TransitionCollection GetTransitions(BindableObject bindable)
         {
-            if (@object == null) throw new ArgumentNullException(nameof(@object));
+            if (bindable == null)
+                throw new ArgumentNullException(nameof(bindable));
 
-            var collection = (TransitionCollection)@object.GetValue(TransitionsProperty);
+            var collection = (TransitionCollection)bindable.GetValue(TransitionsProperty);
             if (collection == null)
             {
                 collection = new TransitionCollection();
-                @object.SetValue(TransitionsProperty, collection);
+                bindable.SetValue(TransitionsProperty, collection);
             }
 
             return collection;
         }
 
-        public static void SetTransitions(BindableObject @object, TransitionCollection collection)
+        public static void SetTransitions(BindableObject bindable, TransitionCollection collection)
         {
-            if (@object == null) throw new ArgumentNullException(nameof(@object));
-            @object.SetValue(TransitionsProperty, collection);
+            if (bindable == null)
+                throw new ArgumentNullException(nameof(bindable));
+            bindable.SetValue(TransitionsProperty, collection);
         }
 
         private static void PropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (ReferenceEquals(oldValue, newValue)) return;
+            if (ReferenceEquals(oldValue, newValue))
+                return;
 
             var oldColl = (TransitionCollection)oldValue;
             var newColl = (TransitionCollection)newValue;
 
-            if (oldColl != null) oldColl.Element = null;
-            if (newColl != null) newColl.Element = bindable as VisualElement;
+            if (oldColl != null)
+                oldColl.Element = null;
+            if (newColl != null)
+                newColl.Element = bindable as VisualElement;
         }
 
         public static void SetImmediate(this VisualElement element, Action setterBlock)
         {
+            if (element is null) throw new ArgumentNullException(nameof(element));
+            if (setterBlock is null) throw new ArgumentNullException(nameof(setterBlock));
+
+
             var transitions = (TransitionCollection)element.GetValue(TransitionsProperty);
             try
             {
-                foreach (var t in transitions ?? Enumerable.Empty<TransitionBase>()) t.IsDisabled = true;
+                foreach (var t in transitions ?? Enumerable.Empty<TransitionBase>())
+                    t.IsDisabled = true;
                 element.BatchBegin();
 
                 setterBlock();
@@ -53,7 +63,8 @@ namespace OliveTree.Transitions
             finally
             {
                 element.BatchCommit();
-                foreach (var t in transitions ?? Enumerable.Empty<TransitionBase>()) t.IsDisabled = false;
+                foreach (var t in transitions ?? Enumerable.Empty<TransitionBase>())
+                    t.IsDisabled = false;
             }
         }
     }

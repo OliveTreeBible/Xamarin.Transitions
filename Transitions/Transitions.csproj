@@ -1,25 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;Xamarin.iOS10;MonoAndroid71</TargetFrameworks><!--;uap10.0-->
-    <PackageTargetFallback>$(PackageTargetFallback);portable-monoandroid10+net45+win+win81+wp8+wpa81+xamarinios10+xamarinmac20</PackageTargetFallback>
+    <TargetFrameworks>netstandard1.4;Xamarin.iOS10;MonoAndroid90</TargetFrameworks><!--;uap10.0-->
     <RootNamespace>OliveTree.Transitions</RootNamespace>
     <AssemblyName>OliveTree.Transitions</AssemblyName>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <Copyright>Copyright 2016</Copyright>
+    <Copyright>Copyright © 2020</Copyright>
+    <VersionPrefix>1.1.0</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
     <Authors>Olive Tree Bible Software, Inc.</Authors>
     <Description>Implicit &amp; declarative Animations library for Xamarin Forms.</Description>
-    <PackageLicenseUrl>https://github.com/OliveTreeBible/Xamarin.Transitions/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/OliveTreeBible/Xamarin.Transitions</PackageProjectUrl>
     <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.561731" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
     <Compile Include="**\*.cs" Exclude="Platforms\**;bin\**;obj\**" />
   </ItemGroup>
 
@@ -60,11 +62,11 @@
         <Compile Include="Platforms\iOS\**\*.cs" />
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)' == 'MonoAndroid71'">
+    <When Condition="'$(TargetFramework)' == 'MonoAndroid90'">
       <PropertyGroup>
         <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
-        <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
-        <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+        <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+        <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
         <DebugType>full</DebugType>
         <DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
         <LanguageTargets>$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets</LanguageTargets>
@@ -80,4 +82,5 @@
       </ItemGroup>
     </When>
   </Choose>
+
 </Project>

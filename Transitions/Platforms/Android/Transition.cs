@@ -49,9 +49,11 @@ namespace OliveTree.Transitions.Droid
 
             if (!transitioning) return;
 
+#pragma warning disable CA2000 // Dispose objects before losing scope
             var trans = new TransitionSet();
             trans.SetOrdering(TransitionOrdering.Together);
             trans.AddListener(new TransitionCompletion(this, container));
+#pragma warning restore CA2000 // Dispose objects before losing scope
 
             foreach (var t in BuildTransitions(_transition?.Element))
                 trans.AddTransition(t);

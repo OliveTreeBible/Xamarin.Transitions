@@ -8,7 +8,7 @@ namespace OliveTree.Transitions.Droid
     {
         private TransitionBase _transition;
 
-        protected DelayedTransition(IntPtr ptr, JniHandleOwnership own) : base(ptr, own) { }
+        protected DelayedTransition(IntPtr handle, JniHandleOwnership own) : base(handle, own) { }
         protected DelayedTransition(TransitionBase transition)
         {
             _transition = transition ?? throw new ArgumentNullException(nameof(transition));
