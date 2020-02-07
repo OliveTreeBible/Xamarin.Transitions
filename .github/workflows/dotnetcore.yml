@@ -9,17 +9,13 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
 
     - name: Build
       run: msbuild Transitions\Transitions.csproj -t:Restore,Build -p:Configuration=Release
-      # -t:Pack   -p:IncludeSymbols=true
 
-  deploy:
-    runs-on: windows-2019
-    if: github.ref == 'refs/heads/master'
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Build
-      run: msbuild Transitions\Transitions.csproj -t:Restore,Build,Pack -p:Configuration=Release,IncludeSymbols=true
+    - name: Deploy
+      if: github.ref == 'refs/heads/master'
+      run: msbuild Transitions\Transitions.csproj -t:Pack -p:Configuration=Release,IncludeSymbols=true
     
