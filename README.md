@@ -1,4 +1,4 @@
-# Xamarin Transitions ![Build](https://github.com/OliveTreeBible/Xamarin.Transitions/workflows/Build%20&%20Pack/badge.svg?branch=master) [![NuGet Status](https://img.shields.io/nuget/v/OliveTree.Transitions.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions/)
+# Xamarin Transitions ![Build](https://github.com/OliveTreeBible/Xamarin.Transitions/workflows/Build/badge.svg) [![NuGet Status](https://img.shields.io/nuget/v/OliveTree.Transitions.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions/)
 
 Declarative & implicit animations Library for Xamarin Forms. 
 
