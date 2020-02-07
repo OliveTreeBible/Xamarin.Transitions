@@ -1,10 +1,8 @@
-# Xamarin Transitions
-Declarative & implicit animations Library for Xamarin Forms. [![Build status](https://ci.appveyor.com/api/projects/status/7lfhk01r687406dh?svg=true)](https://ci.appveyor.com/project/adamhewitt627/xamarin-transitions)
+# Xamarin Transitions ![Build](https://github.com/OliveTreeBible/Xamarin.Transitions/workflows/Build%20&%20Pack/badge.svg?branch=master) [![NuGet Status](https://img.shields.io/nuget/v/OliveTree.Transitions.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions/)
 
-### Nuget Packages
-Supports Android and iOS. UWP is my personal highest priority, but it and other platforms may require community work.
-[![NuGet Status](http://img.shields.io/nuget/v/OliveTree.Transitions.svg?style=flat)](https://www.nuget.org/packages/OliveTree.Transitions/)
+Declarative & implicit animations Library for Xamarin Forms. 
 
+&nbsp;
 
 ## Why Not `Xamarin.Forms.Animation`?
 Xamarin Forms provides a common animation API, especially powerful with its `async`/`await` structure and extensibility. For many apps, it may be all that is necessary. **However**, it operates by setting up its own timing and modifying native view propertiies as it goes. This means the platform's hardware acceleration around animations can't be leveraged. Our experience was a sluggish feel that didn't "pop" the way a native app would.
