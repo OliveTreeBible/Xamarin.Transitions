@@ -6,7 +6,7 @@ namespace OliveTree.Transitions.Droid
 {
     public abstract class DelayedTransition : Android.Transitions.Transition
     {
-        private TransitionBase _transition;
+        private TransitionBase _transition = default!;
 
         protected DelayedTransition(IntPtr handle, JniHandleOwnership own) : base(handle, own) { }
         protected DelayedTransition(TransitionBase transition)

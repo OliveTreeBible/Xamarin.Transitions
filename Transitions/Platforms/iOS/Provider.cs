@@ -13,9 +13,9 @@ namespace OliveTree.Transitions.iOS
             [typeof(Transitions.TransformTransition)] = typeof(TransformTransition)
         };
 
-        public ITransitionHandler Resolve<T>() where T : Transitions.TransitionBase => Resolve(typeof(T));
+        public ITransitionHandler? Resolve<T>() where T : Transitions.TransitionBase => Resolve(typeof(T));
 
-        public virtual ITransitionHandler Resolve(Type transitionType)
+        public virtual ITransitionHandler? Resolve(Type transitionType)
         {
             Type handlerType;
             if (!Handlers.TryGetValue(transitionType, out handlerType))
@@ -25,8 +25,7 @@ namespace OliveTree.Transitions.iOS
                     .FirstOrDefault();
             }
 
-            if (handlerType == null) return null;
-            return Activator.CreateInstance(handlerType) as ITransitionHandler;
+            return handlerType is null ? null : Activator.CreateInstance(handlerType) as ITransitionHandler;
         }
     }
 }

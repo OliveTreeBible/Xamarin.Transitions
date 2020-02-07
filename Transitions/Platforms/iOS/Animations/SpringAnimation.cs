@@ -10,9 +10,9 @@ namespace OliveTree.Animations.iOS
 {
     public class SpringAnimation : CAKeyFrameAnimation
     {
-        private Lazy<double[]> _steps;
-        private Spring _spring;
-        private IInterpolator _interpolator;
+        private Lazy<double[]> _steps = default!;
+        private Spring _spring = default!;
+        private IInterpolator _interpolator = default!;
 
         public override NSObject Copy(NSZone zone)
         {
@@ -27,9 +27,9 @@ namespace OliveTree.Animations.iOS
 
         public SpringAnimation(Spring spring, IInterpolator interpolator)
         {
+            _spring = spring ?? throw new ArgumentNullException(nameof(spring));
+            _interpolator = interpolator ?? throw new ArgumentNullException(nameof(interpolator));
             _steps = new Lazy<double[]>(() => spring.Steps(EasingAnimation.FramesPerSecond).ToArray());
-            _spring = spring;
-            _interpolator = interpolator;
         }
 
         protected internal SpringAnimation(IntPtr handle)

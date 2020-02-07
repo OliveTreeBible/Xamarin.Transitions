@@ -11,9 +11,9 @@ namespace OliveTree.Transitions.iOS
 {
     public abstract class TransitionBase : NSObject, ITransitionHandler
     {
-        public event EventHandler Completed;
-        protected Transitions.TransitionBase Transition { get; private set; }
-        private UIView Renderer { get; set; }
+        public event EventHandler? Completed;
+        protected Transitions.TransitionBase? Transition { get; private set; }
+        private UIView? Renderer { get; set; }
 
         void ITransitionHandler.Attach(Transitions.TransitionBase transition)
         {
@@ -84,15 +84,11 @@ namespace OliveTree.Transitions.iOS
             }
         }
 
-        private static CAPropertyAnimation CreateAnimation(AnimationCurve curve, IInterpolator interpolator)
+        private static CAPropertyAnimation CreateAnimation(AnimationCurve curve, IInterpolator interpolator) => curve switch
         {
-            var spring = curve as Spring;
-            if (spring != null) return new SpringAnimation(spring, interpolator);
-
-            var easing = curve as EasingCurve;
-            if (easing != null) return new EasingAnimation(easing, interpolator);
-
-            throw new NotSupportedException($"{nameof(curve)} doesn't have a supported animator");
-        }
+            Spring spring => new SpringAnimation(spring, interpolator),
+            EasingCurve easing => new EasingAnimation(easing, interpolator),
+            _ => throw new NotSupportedException($"{nameof(curve)} doesn't have a supported animator"),
+        };
     }
 }

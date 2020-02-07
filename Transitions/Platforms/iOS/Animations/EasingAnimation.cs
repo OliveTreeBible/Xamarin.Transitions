@@ -28,8 +28,8 @@ namespace OliveTree.Animations.iOS
 
         protected internal const int FramesPerSecond = 60 * 4; //Probably need more than the 60 refresh rate, but 4 per frame may be excessive
 
-        private EasingCurve _curve;
-        private IInterpolator _interpolator;
+        private EasingCurve _curve = default!;
+        private IInterpolator _interpolator = default!;
 
         public override NSObject Copy(NSZone zone)
         {

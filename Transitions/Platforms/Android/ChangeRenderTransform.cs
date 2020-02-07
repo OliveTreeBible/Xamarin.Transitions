@@ -54,14 +54,15 @@ namespace OliveTree.Transitions.Droid
             Capture(vals, TranslationY, view.TranslationY);
         }
 
-        public override Animator CreateAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues)
+        public override Animator? CreateAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues)
         {
-            if (startValues == null || endValues == null) return null;
+            if (startValues == null || endValues == null) 
+                return null;
 
             var view = endValues.View;
 
             var props = CreatePropertyValues(startValues, endValues).ToArray();
-            return !props.Any() ? null : ObjectAnimator.OfPropertyValuesHolder(view, props);
+            return !props.Any() ? default : ObjectAnimator.OfPropertyValuesHolder(view, props);
         }
 
         private static IEnumerable<PropertyValuesHolder> CreatePropertyValues(TransitionValues startValues, TransitionValues endValues)

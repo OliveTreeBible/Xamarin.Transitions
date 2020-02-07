@@ -7,7 +7,7 @@ namespace OliveTree.Transitions
 {
     public static class Animations
     {
-        public static async Task FadeToAsync(this VisualElement element, double value, AnimationCurve curve = null)
+        public static async Task FadeToAsync(this VisualElement element, double value, AnimationCurve? curve = null)
             => await element.AnimateAsync<OpacityTransition>(() => element.Opacity = value).ConfigureAwait(false);
 
         private static async Task AnimateAsync<TTransition>(this VisualElement element, Action setter)

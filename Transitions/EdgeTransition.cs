@@ -15,8 +15,9 @@ namespace OliveTree.Transitions
             get
             {
                 var e = Element;
-                var p = (VisualElement)Element?.Parent;
-                if (e == null || p == null) return new EasingCurve();
+                var p = (VisualElement?)Element?.Parent;
+                if (e is null || p is null) 
+                    return new EasingCurve();
 
                 return e.Bounds.IntersectsWith(p.Bounds) ? Enter : Exit;
             }

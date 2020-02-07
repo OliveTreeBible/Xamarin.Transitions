@@ -10,11 +10,11 @@ namespace OliveTree.Transitions
 {
     public abstract class TransitionBase
     {
-        private VisualElement _element;
+        private VisualElement? _element;
         private bool _animating;
 
-        private readonly ITransitionHandler _handler;
-        public event EventHandler<bool> Transitioning;
+        private readonly ITransitionHandler? _handler;
+        public event EventHandler<bool>? Transitioning;
 
         protected TransitionBase()
         {
@@ -27,7 +27,7 @@ namespace OliveTree.Transitions
         public virtual AnimationCurve Curve { get; set; } = new EasingCurve();
         public bool IsDisabled { get; set; }
 
-        public VisualElement Element
+        public VisualElement? Element
         {
             // ReSharper disable once MemberCanBePrivate.Global
             get { return _element; }
@@ -42,14 +42,14 @@ namespace OliveTree.Transitions
             }
         }
 
-        private void UnregisterHandlers(VisualElement element)
+        private void UnregisterHandlers(VisualElement? element)
         {
             if (element == null) return;
             element.BatchCommitted -= BatchCommitted;
             element.PropertyChanging -= ElementOnPropertyChanging;
             element.PropertyChanged -= ElementOnPropertyChanged;
         }
-        private void RegisterHandlers(VisualElement element)
+        private void RegisterHandlers(VisualElement? element)
         {
             if (element == null) return;
             element.BatchCommitted += BatchCommitted;
@@ -109,7 +109,7 @@ namespace OliveTree.Transitions
         {
             if (action is null) throw new ArgumentNullException(nameof(action));
 
-            if (_handler == null)
+            if (_handler is null)
             {
                 action();
                 return;
@@ -125,7 +125,8 @@ namespace OliveTree.Transitions
 
             void Handler(object _, EventArgs __)
             {
-                _handler.Completed -= Handler;
+                if (_handler is var h && h is object)
+                    h.Completed -= Handler;
                 tcs.TrySetResult(true);
             }
         }

@@ -6,7 +6,7 @@ namespace OliveTree.Transitions.Droid
 {
     public class ChangeBounds : Android.Transitions.ChangeBounds
     {
-        private TransitionBase _transition;
+        private TransitionBase _transition = default!;
 
         public ChangeBounds(TransitionBase transition)
         {

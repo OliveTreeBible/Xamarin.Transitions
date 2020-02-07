@@ -27,16 +27,18 @@ namespace OliveTree.Transitions.Droid
 
         private static void CaptureValues(TransitionValues values) => values.Values[PropertyName] = values.View.Alpha;
 
-        public override Animator CreateAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues)
+        public override Animator? CreateAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues)
         {
-            if (startValues == null || endValues == null) return null;
+            if (startValues == null || endValues == null)
+                return null;
 
             var view = endValues.View;
             float start = (float)startValues.Values[PropertyName],
                 end = (float)endValues.Values[PropertyName];
 
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (start == end) return null;
+            if (start == end) 
+                return null;
 
             var anim = ValueAnimator.OfFloat(start, end);
             anim.Update += (_, args) =>
