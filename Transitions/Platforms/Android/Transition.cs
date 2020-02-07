@@ -14,9 +14,9 @@ namespace OliveTree.Transitions.Droid
 {
     public class Transition : ITransitionHandler
     {
-        private TransitionBase _transition;
+        private TransitionBase? _transition;
 
-        public event EventHandler Completed;
+        public event EventHandler? Completed;
 
         void ITransitionHandler.Attach(TransitionBase transition)
         {
@@ -31,7 +31,7 @@ namespace OliveTree.Transitions.Droid
                 _transition.Transitioning += OnTransitioning;
         }
 
-        protected ViewGroup Container
+        protected ViewGroup? Container
         {
             get
             {
@@ -49,9 +49,11 @@ namespace OliveTree.Transitions.Droid
 
             if (!transitioning) return;
 
+#pragma warning disable CA2000 // Dispose objects before losing scope
             var trans = new TransitionSet();
             trans.SetOrdering(TransitionOrdering.Together);
             trans.AddListener(new TransitionCompletion(this, container));
+#pragma warning restore CA2000 // Dispose objects before losing scope
 
             foreach (var t in BuildTransitions(_transition?.Element))
                 trans.AddTransition(t);
@@ -59,7 +61,7 @@ namespace OliveTree.Transitions.Droid
             TransitionManager.BeginDelayedTransition(container, trans);
         }
 
-        private static IEnumerable<Android.Transitions.Transition> BuildTransitions(VisualElement element)
+        private static IEnumerable<Android.Transitions.Transition> BuildTransitions(VisualElement? element)
         {
             if (element == null) yield break;
 

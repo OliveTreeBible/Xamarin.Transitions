@@ -17,8 +17,10 @@ namespace OliveTree.Animations.iOS
     public class EasingAnimation : CAKeyFrameAnimation
     {
 #if DEBUG
+#pragma warning disable CA1401 // P/Invokes should not be visible
         [System.Runtime.InteropServices.DllImport(ObjCRuntime.Constants.UIKitLibrary, EntryPoint = "UIAnimationDragCoefficient")]
         protected internal static extern float DragCoefficient();
+#pragma warning restore CA1401 // P/Invokes should not be visible
 #else
         protected internal static nfloat DragCoefficient() => 1.0f;
 #endif
@@ -26,8 +28,8 @@ namespace OliveTree.Animations.iOS
 
         protected internal const int FramesPerSecond = 60 * 4; //Probably need more than the 60 refresh rate, but 4 per frame may be excessive
 
-        private EasingCurve _curve;
-        private IInterpolator _interpolator;
+        private EasingCurve _curve = default!;
+        private IInterpolator _interpolator = default!;
 
         public override NSObject Copy(NSZone zone)
         {

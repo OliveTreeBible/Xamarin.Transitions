@@ -1,21 +1,19 @@
 using System;
 using Android.Animation;
 using Android.Runtime;
-using Android.Transitions;
-using Android.Views;
 
 namespace OliveTree.Transitions.Droid
 {
     public class ChangeBounds : Android.Transitions.ChangeBounds
     {
-        private TransitionBase _transition;
+        private TransitionBase _transition = default!;
 
         public ChangeBounds(TransitionBase transition)
         {
             _transition = transition ?? throw new ArgumentNullException(nameof(transition));
         }
 
-        public ChangeBounds(IntPtr ptr, JniHandleOwnership own) : base(ptr, own) { }
+        public ChangeBounds(IntPtr handle, JniHandleOwnership own) : base(handle, own) { }
         public override Android.Transitions.Transition Clone()
         {
             var clone = (ChangeBounds)base.Clone();

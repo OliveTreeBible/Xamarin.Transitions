@@ -6,9 +6,9 @@ namespace OliveTree.Transitions
 {
     public class TransitionCollection : Collection<TransitionBase>
     {
-        private VisualElement _element;
+        private VisualElement? _element;
 
-        public VisualElement Element
+        public VisualElement? Element
         {
             // ReSharper disable once MemberCanBePrivate.Global
             get { return _element; }

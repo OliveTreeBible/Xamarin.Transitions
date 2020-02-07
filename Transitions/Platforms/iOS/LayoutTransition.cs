@@ -12,6 +12,8 @@ namespace OliveTree.Transitions.iOS
 
         protected override void BeganAnimation(UIView target)
         {
+            if (target is null) throw new ArgumentNullException(nameof(target));
+
             Console.WriteLine($"{target.GetHashCode()} - {target.Layer.Bounds}");
             _start = target.Layer.Bounds;
             _startPosition = target.Layer.Position;
@@ -19,6 +21,7 @@ namespace OliveTree.Transitions.iOS
 
         protected override void EndingAnimation(UIView target)
         {
+            if (target is null) throw new ArgumentNullException(nameof(target));
             target.LayoutIfNeeded();
 
             AnimateLayer(new RectInterpolator

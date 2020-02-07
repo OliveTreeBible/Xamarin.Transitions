@@ -13,7 +13,7 @@ namespace OliveTree.Transitions.iOS
 
         protected override void BeganAnimation(UIView target)
         {
-            _start = default(Transform);
+            _start = default;
             var ve = Transition?.Element;
             if (ve == null) return;
 
@@ -22,6 +22,8 @@ namespace OliveTree.Transitions.iOS
 
         protected override void EndingAnimation(UIView target)
         {
+            if (target is null) throw new ArgumentNullException(nameof(target));
+
             var ve = Transition?.Element;
             if (ve == null) return;
 

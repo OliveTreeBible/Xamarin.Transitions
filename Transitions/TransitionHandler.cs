@@ -10,7 +10,7 @@ namespace OliveTree.Transitions
 
     public interface ITransitionProvider
     {
-        ITransitionHandler Resolve<T>() where T : TransitionBase;
-        ITransitionHandler Resolve(Type transitionType);
+        ITransitionHandler? Resolve<T>() where T : TransitionBase;
+        ITransitionHandler? Resolve(Type transitionType);
     }
 }
