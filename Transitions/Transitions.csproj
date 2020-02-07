@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.29">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;Xamarin.iOS10;MonoAndroid90</TargetFrameworks><!--;uap10.0-->
+    <TargetFrameworks>netstandard1.4;Xamarin.iOS10;MonoAndroid10.0</TargetFrameworks><!--;uap10.0-->
     <RootNamespace>OliveTree.Transitions</RootNamespace>
     <AssemblyName>OliveTree.Transitions</AssemblyName>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <Copyright>Copyright © 2020</Copyright>
-    <VersionPrefix>1.1.0</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet">
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <Copyright>Copyright © 2020</Copyright>
     <Authors>Olive Tree Bible Software, Inc.</Authors>
     <Description>Implicit &amp; declarative Animations library for Xamarin Forms.</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -43,41 +43,19 @@
         <Compile Include="Platforms\UAP\**\*.cs" />
       </ItemGroup>
     </When>-->
-    <When Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
+    <When Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
       <PropertyGroup>
-        <TargetFrameworkIdentifier>Xamarin.iOS</TargetFrameworkIdentifier>
-        <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-        <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-        <DefineConstants>$(DefineConstants);COCOA_COMMON</DefineConstants>
-        <DebugType>full</DebugType>
         <LanguageTargets>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets</LanguageTargets>
       </PropertyGroup>
       <ItemGroup>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Xml" />
-        <Reference Include="System.Xml.Linq" />
-        <Reference Include="System.Runtime.Serialization" />
-        <Reference Include="Xamarin.iOS" />
         <Compile Include="Platforms\iOS\**\*.cs" />
       </ItemGroup>
     </When>
-    <When Condition="'$(TargetFramework)' == 'MonoAndroid90'">
+    <When Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
       <PropertyGroup>
-        <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
-        <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
-        <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-        <DebugType>full</DebugType>
-        <DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
         <LanguageTargets>$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets</LanguageTargets>
       </PropertyGroup>
       <ItemGroup>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Runtime.Serialization" />
-        <Reference Include="System.Xml" />
-        <Reference Include="System.Xml.Linq" />
-        <Reference Include="Mono.Android" />
         <Compile Include="Platforms\Android\**\*.cs" />
       </ItemGroup>
     </When>
