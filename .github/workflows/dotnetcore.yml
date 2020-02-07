@@ -1,4 +1,4 @@
-name: Build & Pack
+name: Build
 
 on: [push]
 
@@ -17,8 +17,8 @@ jobs:
       run: echo "::set-env name=VersionSuffix::ci${{ github.run_number }}"
 
     - name: Build
-      run: msbuild -t:Restore,Build,Pack -p:Configuration=Release,IncludeSymbols=true
+      run: msbuild -t:Restore,Build,Pack -p:Configuration=Release
 
     - name: Deploy
       if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
-      run: dotnet nuget push **\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
+      run: dotnet nuget push **\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }}
