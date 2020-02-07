@@ -20,5 +20,5 @@ jobs:
       run: msbuild -t:Restore,Build,Pack -p:Configuration=Release,IncludeSymbols=true
 
     - name: Deploy
-      if: contains( ["refs/heads/master", "refs/heads/release"], github.ref )
+      if: github.ref=="refs/heads/master" || github.ref=="refs/heads/release"
       run: dotnet nuget push **\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }} --skip-duplicate
